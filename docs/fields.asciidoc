@@ -128,12 +128,22 @@ None
 
 
 [float]
-=== counter
+=== domain
 
-type: long
+type: string
 
 required: True
 
-PLEASE UPDATE DOCUMENTATION
+Domain name of the of registered Cloudstack domain
+
+
+[float]
+=== domain
+
+type: string
+
+required: True
+
+Domain name of the of registered Cloudstack domain
 
 

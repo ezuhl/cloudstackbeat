@@ -25,12 +25,10 @@ func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
 	if err := cfg.Unpack(&config); err != nil {
 		return nil, fmt.Errorf("Error reading config file: %v", err)
 	}
-
 	bt := &Cloudstackbeat{
 		done: make(chan struct{}),
 		config: config,
 	}
-
 	return bt, nil
 }
 
@@ -67,7 +65,7 @@ func (bt *Cloudstackbeat) PushDomainLimits(beatname string) {
 
 	listDomainResult, err := csClient.Domain.ListDomains(params)
 	if err != nil {
-		logp.Info("Could not get information from cloudstack management server %s with err %s", bt.config.ApiUrl, err)
+		logp.Warn("Could not get information from cloudstack management server %s with err %s", bt.config.ApiUrl, err)
 		return
 	}
 
