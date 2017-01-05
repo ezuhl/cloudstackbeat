@@ -1,0 +1,15 @@
+- key: cloudstackbeat
+  title: cloudstackbeat
+  description:
+  fields:
+    - name: domain
+      type: string
+      required: true
+      description: >
+        Domain name of the of registered Cloudstack domain
+    - name: domain
+      type: string
+      required: true
+      description: >
+        Domain name of the of registered Cloudstack domain
+

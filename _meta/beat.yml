@@ -1,0 +1,17 @@
+################### Cloudstackbeat Configuration Example #########################
+
+############################# Cloudstackbeat ######################################
+
+cloudstackbeat:
+  # Defines how often an event is sent to the output
+  period: 10s
+  cloudstackkey: ""
+  cloudstacksecret: ""
+  cloudstackurl:  ""
+
+
+
+output.elasticsearch:
+  # Array of hosts to connect to.
+  hosts: ["localhost:9200"]
+  index: "beat-cloudstack-%{+yyyy.MM.dd}"
