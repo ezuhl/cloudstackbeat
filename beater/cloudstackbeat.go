@@ -7,17 +7,23 @@ import (
 	"github.com/elastic/beats/libbeat/common"
 	"github.com/elastic/beats/libbeat/logp"
 	"github.com/elastic/beats/libbeat/publisher"
-	"github.com/ezuhl/cloudstackbeat/config"
 	"github.com/xanzy/go-cloudstack/cloudstack"
-	//"encoding/json"
-	//"reflect"
 	"reflect"
 	"strconv"
 )
 
+type Config struct {
+	Period time.Duration `config:"period"`
+	ApiKey string `config:"cloudstackkey"`
+	ApiSecret string `config:"cloudstacksecret"`
+	ApiUrl string `config:"cloudstackurl"`
+}
+
+
+
 type Cloudstackbeat struct {
 	done   chan struct{}
-	config config.Config
+	config Config
 	client publisher.Client
 }
 type ElasticDomain struct {
@@ -69,7 +75,7 @@ type ElasticDomain struct {
 }
 // Creates beater
 func New(b *beat.Beat, cfg *common.Config) (beat.Beater, error) {
-	config := config.DefaultConfig
+	config := Config{}
 	if err := cfg.Unpack(&config); err != nil {
 		return nil, fmt.Errorf("Error reading config file: %v", err)
 	}
@@ -144,7 +150,6 @@ func (bt *Cloudstackbeat) getElasticDomain(cloudstackDomain *cloudstack.Domain) 
 	voe := reflect.ValueOf(&correctDataDomain)
 
 	elm := voe.Elem()
-	fmt.Println("arf")
 	for i := 0; i < toe.NumField(); i += 1 {
 		name := toe.Field(i).Name
 		cValue := voc.FieldByName(name)
